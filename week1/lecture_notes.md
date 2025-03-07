@@ -159,12 +159,12 @@ Estas são as notas de aula da primeira semana do curso de Aprendizado de Máqui
 Considere um conjunto de dados com $m$ exemplos. A função de custo (MSE) é dada por:
 
 $$
-  J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
+  J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 $$
 
 onde
 
-\[f_{w,b}(x^{(i)}) = wx^{(i)} + b \tag{2}\]
+$$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 - $f_{w,b}(x^{(i)})$ é nossa previsão para o exemplo $i$ usando os parâmetros $w,b$.  
 - $(f_{w,b}(x^{(i)}) -y^{(i)})^2$ é a diferença quadrada entre o valor alvo e a previsão.  
 - Essas diferenças são somadas para todos os $m$ exemplos e divididas por `2m` para produzir o custo, $J(w,b)$.
