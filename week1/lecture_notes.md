@@ -187,14 +187,14 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 #### Atualização dos Parâmetros:
    - O gradiente descendente atualiza os parâmetros $w$ e $b$ iterativamente para minimizar a função de custo $J(w, b)$.
    - A fórmula de atualização para $w$ é:
-    $$
+    $
      w = w -
      \alpha \cdot \frac{d}{dw} J(w, b)
-    $$
+    $
    - A fórmula de atualização para $b$ é:
-     $$
+     $
      b = b - \alpha \cdot \frac{d}{db} J(w, b)
-     $$
+     $
    - Onde:
      - $\alpha$: Taxa de aprendizado (controla o tamanho do passo).
      - $\frac{d}{dw} J(w, b)$ e $\frac{d}{db} J(w, b)$: Derivadas parciais da função de custo em relação a $w$ e $b$, respectivamente.
@@ -210,7 +210,8 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
      - Calcular os novos valores de $w$ e $b$ em variáveis temporárias (`temp_w` e `temp_b`).
      - Atualizar $w$ e $b$ com os valores temporários.
      - A atualização simultânea é feita da seguinte forma:
-     $$
+     
+     - $$
      \begin{aligned}
      temp\_w &= w - \alpha \frac{\partial}{\partial w} J(w, b) \\
      temp\_b &= b - \alpha \frac{\partial}{\partial b} J(w, b) \\
