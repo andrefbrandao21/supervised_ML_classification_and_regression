@@ -187,14 +187,9 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 #### Atualização dos Parâmetros:
    - O gradiente descendente atualiza os parâmetros $w$ e $b$ iterativamente para minimizar a função de custo $J(w, b)$.
    - A fórmula de atualização para $w$ é:
-    $
-     w = w -
-     \alpha \cdot \frac{d}{dw} J(w, b)
-    $
+    `w = w - α * ∂J(w, b)/∂w`
    - A fórmula de atualização para $b$ é:
-     $
-     b = b - \alpha \cdot \frac{d}{db} J(w, b)
-     $
+     `b = b - α * ∂J(w, b)/∂b`
    - Onde:
      - $\alpha$: Taxa de aprendizado (controla o tamanho do passo).
      - $\frac{d}{dw} J(w, b)$ e $\frac{d}{db} J(w, b)$: Derivadas parciais da função de custo em relação a $w$ e $b$, respectivamente.
@@ -210,13 +205,14 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
      - Calcular os novos valores de $w$ e $b$ em variáveis temporárias (`temp_w` e `temp_b`).
      - Atualizar $w$ e $b$ com os valores temporários.
      - A atualização simultânea é feita da seguinte forma:
-       - `w`: `temp_w = w - α * ∂J(w, b)/∂w`
+       - `temp_w = w - α * ∂J(w, b)/∂w`
        - `b`: `temp_b = b - α * ∂J(w, b)/∂b`
        - `w = temp_w`, `b = temp_b`
 
 
 
-   - A atualização não simultânea pode levar a resultados incorretos, pois o valor de $w$ ou $b$ já atualizado afeta o cálculo da derivada. A atualização não simultânea é feita da seguinte maneira:
+   - A atualização não simultânea pode levar a resultados incorretos, pois o valor de $w$ ou $b$ já atualizado afeta o cálculo da derivada. 
+     - A atualização não simultânea é feita da seguinte maneira:
        - `temp_w = w - α * ∂J(w, b)/∂w`
        -  `w = temp_w`
        - `temp_b = b - α * ∂J(temp_w, b)/∂b`
@@ -257,9 +253,7 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 
 #### Modelo de Regressão Linear:
    - O modelo é definido por:
-     $$
-     f_{w,b}(x) = wx + b
-     $$
+     $$ f_{w,b}(x) = wx + b $$
    - Onde:
      - $w$: Coeficiente angular (peso).
      - $b$: Intercepto (viés).
