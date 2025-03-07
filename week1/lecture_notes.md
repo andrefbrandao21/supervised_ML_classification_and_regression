@@ -190,7 +190,8 @@ $$
    - O gradiente descendente atualiza os parâmetros $w$ e $b$ iterativamente para minimizar a função de custo $J(w, b)$.
    - A fórmula de atualização para $w$ é:
      $$
-     w = w - \alpha \cdot \frac{d}{dw} J(w, b)
+     w = w -
+      \alpha \cdot \frac{d}{dw} J(w, b)
      $$
    - A fórmula de atualização para $b$ é:
      $$
