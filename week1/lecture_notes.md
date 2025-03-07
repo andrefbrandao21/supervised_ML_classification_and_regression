@@ -260,9 +260,7 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 
 #### Função de Custo (Erro Quadrático Médio):
    - A função de custo $J(w, b)$ é dada por:
-    $$
-      J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
-    $$
+$$ J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 $$
    - Onde:
      - $m$: Número de exemplos de treinamento.
      - $f_{w,b}(x^{(i)})$: Previsão do modelo para o exemplo $i$.
