@@ -158,7 +158,9 @@ Estas são as notas de aula da primeira semana do curso de Aprendizado de Máqui
 
 Considere um conjunto de dados com $m$ exemplos. A função de custo (MSE) é dada por:
 
-\[J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}\]
+$$
+  J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
+$$
 
 onde
 
@@ -185,10 +187,10 @@ onde
 #### Atualização dos Parâmetros:
    - O gradiente descendente atualiza os parâmetros $w$ e $b$ iterativamente para minimizar a função de custo $J(w, b)$.
    - A fórmula de atualização para $w$ é:
-     $$
+    $$
      w = w -
      \alpha \cdot \frac{d}{dw} J(w, b)
-     $$
+    $$
    - A fórmula de atualização para $b$ é:
      $$
      b = b - \alpha \cdot \frac{d}{db} J(w, b)
