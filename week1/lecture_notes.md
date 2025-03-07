@@ -210,26 +210,17 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
      - Calcular os novos valores de $w$ e $b$ em variáveis temporárias (`temp_w` e `temp_b`).
      - Atualizar $w$ e $b$ com os valores temporários.
      - A atualização simultânea é feita da seguinte forma:
-     
-     - $$
-     \begin{aligned}
-     temp\_w &= w - \alpha \frac{\partial}{\partial w} J(w, b) \\
-     temp\_b &= b - \alpha \frac{\partial}{\partial b} J(w, b) \\
-     w &= temp\_w \\
-     b &= temp\_b
-     \end{aligned}
-     $$
+       - `w`: `temp_w = w - α * ∂J(w, b)/∂w`
+       - `b`: `temp_b = b - α * ∂J(w, b)/∂b`
+       - `w = temp_w`, `b = temp_b`
+
+
 
    - A atualização não simultânea pode levar a resultados incorretos, pois o valor de $w$ ou $b$ já atualizado afeta o cálculo da derivada. A atualização não simultânea é feita da seguinte maneira:
-     $$
-     \begin{aligned}
-     temp\_w &= w - \alpha \frac{\partial}{\partial w} J(w, b) \\
-     w &= temp\_w \\
-     temp\_b &= b - \alpha \frac{\partial}{\partial b} J(w, b) \\
-     b &= temp\_b
-     \end{aligned}
-     $$
-
+       - `temp_w = w - α * ∂J(w, b)/∂w`
+       -  `w = temp_w`
+       - `temp_b = b - α * ∂J(temp_w, b)/∂b`
+       -  `b = temp_b`
 #### Convergência:
    - O algoritmo converge quando $w$ e $b$ param de mudar significativamente a cada iteração.
    - Nesse ponto, o algoritmo atinge um mínimo local da função de custo.
