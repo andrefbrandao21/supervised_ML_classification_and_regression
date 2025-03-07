@@ -260,9 +260,9 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 
 #### Função de Custo (Erro Quadrático Médio):
    - A função de custo $J(w, b)$ é dada por:
-     $$
-     J(w, b) = \frac{1}{2m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})^2
-     $$
+    $$
+      J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
+    $$
    - Onde:
      - $m$: Número de exemplos de treinamento.
      - $f_{w,b}(x^{(i)})$: Previsão do modelo para o exemplo $i$.
@@ -270,13 +270,13 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 
 #### Derivadas Parciais:
    - A derivada em relação a $w$ é:
-     $$
+    $$
      \frac{\partial}{\partial w} J(w, b) = \frac{1}{m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}
-     $$
+    $$
    - A derivada em relação a $b$ é:
-     $$
+    $$
      \frac{\partial}{\partial b} J(w, b) = \frac{1}{m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})
-     $$
+    $$
 
 #### Propriedades da Função de Custo:
    - A função de custo de erro quadrático médio é **convexa**, o que significa que ela tem um único mínimo global.
