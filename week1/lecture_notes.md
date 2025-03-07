@@ -256,8 +256,9 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 
 #### Modelo de Regressão Linear:
    - O modelo é definido por:
-   
+
      $$ f_{w,b}(x) = wx + b $$
+   
    - Onde:
      - $w$: Coeficiente angular (peso).
      - $b$: Intercepto (viés).
