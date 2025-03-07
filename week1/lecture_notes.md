@@ -187,9 +187,12 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 #### Atualização dos Parâmetros:
    - O gradiente descendente atualiza os parâmetros $w$ e $b$ iterativamente para minimizar a função de custo $J(w, b)$.
    - A fórmula de atualização para $w$ é:
-    `w = w - α * ∂J(w, b)/∂w`
+
+     $$w =w- \alpha \times \frac{d}{dw} J(w, b)$$   
+   
    - A fórmula de atualização para $b$ é:
-     `b = b - α * ∂J(w, b)/∂b`
+    
+     $$b =b- \alpha \times \frac{d}{db} J(w, b)$$
    - Onde:
      - $\alpha$: Taxa de aprendizado (controla o tamanho do passo).
      - $\frac{d}{dw} J(w, b)$ e $\frac{d}{db} J(w, b)$: Derivadas parciais da função de custo em relação a $w$ e $b$, respectivamente.
@@ -260,7 +263,7 @@ $$f_{w,b}(x^{(i)}) = wx^{(i)} + b $$
 
 #### Função de Custo (Erro Quadrático Médio):
    - A função de custo $J(w, b)$ é dada por:
-   
+
 $$ J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 $$
    - Onde:
      - $m$: Número de exemplos de treinamento.
@@ -269,13 +272,15 @@ $$ J(w, b) = \frac{1}{2m} \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 $$
 
 #### Derivadas Parciais:
    - A derivada em relação a $w$ é:
-    $$
+
+$$
      \frac{\partial}{\partial w} J(w, b) = \frac{1}{m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}
-    $$
+$$
    - A derivada em relação a $b$ é:
-    $$
+
+$$
      \frac{\partial}{\partial b} J(w, b) = \frac{1}{m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})
-    $$
+$$
 
 #### Propriedades da Função de Custo:
    - A função de custo de erro quadrático médio é **convexa**, o que significa que ela tem um único mínimo global.
