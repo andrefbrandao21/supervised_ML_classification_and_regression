@@ -135,7 +135,7 @@ $$
 
 $$
 w_2 = w_2 - 0.1 \cdot d_2
-$$
+$
 
 $$
 \vdots
@@ -219,5 +219,168 @@ w = w - 0.1 * d
     - Lento para um grande número de características.
   - Usado em bibliotecas de aprendizado de máquina, mas não é comum implementá-lo manualmente.
 
+# Gradiente descendente na prática
+## Técnicas para Melhorar o Desempenho do Gradiente Descendente
 
+### Dimensionamento de Recursos
+- **Objetivo**: Acelerar a execução do gradiente descendente.
+- **Exemplo**: Prever o preço de uma casa com duas características:
+  - $x_1$: Tamanho da casa (300 a 2.000 pés quadrados).
+  - $x_2$: Número de quartos (0 a 5 quartos).
+
+### Relação entre Tamanho do Recurso e Parâmetros
+- **Exemplo de Parâmetros**:
+  - $w_1 = 50$, $w_2 = 0.1$, $b = 50$.
+  - Preço estimado: $100.000 + 0.5k + 50k = 100.5k$ (muito longe de $500k$).
+  
+- **Outro Exemplo de Parâmetros**:
+  - $w_1 = 0.1$, $w_2 = 50$, $b = 50$.
+  - Preço estimado: $0.1 \times 2000 + 50 \times 5 + 50 = 200k + 250k + 50 = 500k$ (estimativa correta).
+
+### Impacto do Tamanho dos Recursos nos Parâmetros
+- **Recursos com Faixa Grande**: Parâmetros menores (ex.: $w_1 = 0.1$).
+- **Recursos com Faixa Pequena**: Parâmetros maiores (ex.: $w_2 = 50$).
+
+### Gráfico de Dispersão e Função de Custo
+- **Gráfico de Dispersão**:
+  - Eixo horizontal ($x_1$): Tamanho da casa (faixa maior).
+  - Eixo vertical ($x_2$): Número de quartos (faixa menor).
+
+- **Gráfico de Contorno da Função de Custo**:
+  - Contornos ovais/elípticos devido à diferença de escala entre $x_1$ e $x_2$.
+  - Pequenas mudanças em $w_1$ têm grande impacto no custo $J$.
+  - Grandes mudanças em $w_2$ são necessárias para alterar significativamente o custo $J$.
+
+### Problema com Gradiente Descendente sem Escalonamento
+- **Oscilações**: Gradiente descendente pode oscilar por muito tempo antes de convergir.
+- **Causa**: Contornos altos e estreitos devido à diferença de escala entre $x_1$ e $x_2$.
+
+### Solução: Escalonamento de Recursos
+- **Transformação dos Dados**:
+  - Redimensionar $x_1$ e $x_2$ para faixas comparáveis (ex.: 0 a 1).
+- **Resultado**:
+  - Contornos mais circulares.
+  - Gradiente descendente converge mais rapidamente ao mínimo global.
+
+
+## Métodos de Escalonamento
+
+### Divisão pelo Máximo
+- **Exemplo para $x_1$** (tamanho da casa):
+  - Faixa original: 300 a 2000.
+  - Escalonado: $x_1^{\text{escalado}} = \frac{x_1}{2000}$.
+  - Nova faixa: 0.15 a 1.
+
+- **Exemplo para $x_2$** (número de quartos):
+  - Faixa original: 0 a 5.
+  - Escalonado: $x_2^{\text{escalado}} = \frac{x_2}{5}$.
+  - Nova faixa: 0 a 1.
+
+### Normalização Média
+- **Passos**:
+  1. Calcular a média ($\mu_1$) do recurso $x_1$.
+  2. Subtrair a média e dividir pela diferença entre máximo e mínimo.
+  
+- **Exemplo para $x_1$**:
+  - Média ($\mu_1$): 600.
+  - Escalonado: $x_1^{\text{normalizado}} = \frac{x_1 - \mu_1}{2000 - 300}$.
+  - Nova faixa: -0.18 a 0.82.
+
+- **Exemplo para $x_2$**:
+  - Média ($\mu_2$): 2.3.
+  - Escalonado: $x_2^{\text{normalizado}} = \frac{x_2 - \mu_2}{5 - 0}$.
+  - Nova faixa: -0.46 a 0.54.
+
+### Normalização do Escore Z
+- **Passos**:
+  1. Calcular a média ($\mu$) e o desvio padrão ($\sigma$) do recurso.
+  2. Subtrair a média e dividir pelo desvio padrão.
+
+- **Exemplo para $x_1$**:
+  - Média ($\mu_1$): 600.
+  - Desvio padrão ($\sigma_1$): 450.
+  - Escalonado: $x_1^{\text{Z-score}} = \frac{x_1 - \mu_1}{\sigma_1}$.
+  - Nova faixa: -0.67 a 3.1.
+
+- **Exemplo para $x_2$**:
+  - Média ($\mu_2$): 2.3.
+  - Desvio padrão ($\sigma_2$): 1.4.
+  - Escalonado: $x_2^{\text{Z-score}} = \frac{x_2 - \mu_2}{\sigma_2}$.
+  - Nova faixa: -1.6 a 1.9.
+
+### Regras Gerais para Escalonamento
+- **Faixa Ideal**: -1 a 1 (ou valores próximos).
+- **Exceções**:
+  - Se um recurso varia entre -3 e 3, ou -0.3 e 0.3, ainda é aceitável.
+  - Recursos com valores muito grandes (ex.: -100 a 100) ou muito pequenos (ex.: -0.001 a 0.001) devem ser escalonados.
+
+### Benefícios do Escalonamento
+- **Acelera a convergência** do gradiente descendente.
+- **Facilita a visualização** dos dados e da função de custo.
+
+## Método de Verificação de convergência do gradiente descendente
+
+### Curva de Aprendizado
+- **Definição**: Gráfico que mostra o valor da função de custo $J(w, b)$ após cada iteração do gradiente descendente.
+- **Eixo Horizontal**: Número de iterações do gradiente descendente.
+- **Eixo Vertical**: Valor da função de custo $J(w, b)$.
+
+### Comportamento Esperado
+- **Custo Decrescente**: Se o gradiente descendente estiver funcionando corretamente, $J(w, b)$ deve diminuir após cada iteração.
+- **Estabilização**: Após um certo número de iterações, $J(w, b)$ pode se estabilizar, indicando que o gradiente descendente convergiu.
+
+### Problemas Comuns
+- **Aumento do Custo**: Se $J(w, b)$ aumentar após uma iteração, pode indicar:
+  - Taxa de aprendizado $\alpha$ muito alta.
+  - Bug no código.
+
+### Número de Iterações
+- **Variação**: O número de iterações necessárias para convergir pode variar significativamente entre diferentes aplicações:
+  - Pode ser tão pouco quanto 30 iterações.
+  - Pode exigir até 100.000 iterações.
+
+### Teste Automático de Convergência
+- **Definição**: Declarar convergência se a redução no custo $J(w, b)$ for menor que um valor pequeno $\epsilon$ (ex.: 0.001) em uma iteração.
+- **Desafio**: Escolher o valor adequado para $\epsilon$ pode ser difícil.
+
+### Recomendação
+- **Visualização Gráfica**: Observar a curva de aprendizado é geralmente mais informativo do que confiar em testes automáticos de convergência.
+- **Inspeção Visual**: Ajuda a identificar problemas no funcionamento do gradiente descendente.
+
+
+## Escolha da Taxa de Aprendizado (Alpha) no Gradiente Descendente
+
+### Importância da Taxa de Aprendizado
+- **Taxa de Aprendizado Muito Pequena**: O algoritmo converge muito lentamente.
+- **Taxa de Aprendizado Muito Grande**: O algoritmo pode não convergir, oscilando ou divergindo.
+
+### Sinais de Problemas com a Taxa de Aprendizado
+- **Custo Oscilante**: Se o custo $J(w, b)$ aumenta e diminui alternadamente, isso pode indicar:
+  - **Taxa de Aprendizado Muito Grande**: Atualizações excessivas fazem o algoritmo "pular" o mínimo.
+  - **Bug no Código**: Verificar a implementação do gradiente descendente.
+
+- **Custo Aumentando Consistentemente**: Se o custo $J(w, b)$ aumenta após cada iteração, isso geralmente indica:
+  - **Taxa de Aprendizado Muito Grande**: Atualizações são tão grandes que o algoritmo se afasta do mínimo.
+  - **Erro no Código**: Verificar se o sinal negativo está presente na atualização dos parâmetros:
+    - Correto: $w_1 = w_1 - \alpha \times \frac{\partial J}{\partial w_1}$.
+    - Incorreto: $w_1 = w_1 + \alpha \times \frac{\partial J}{\partial w_1}$.
+
+### Depuração e Escolha de Alpha
+- **Teste com Alpha Pequeno**:
+  - Definir $\alpha$ como um valor muito pequeno (ex.: 0.0001).
+  - Verificar se o custo $J(w, b)$ diminui a cada iteração.
+  - Se o custo ainda oscilar ou aumentar, pode haver um bug no código.
+
+- **Desvantagem de Alpha Pequeno**:
+  - O algoritmo pode levar muitas iterações para convergir.
+
+### Escolha Prática de Alpha
+- **Testar uma Faixa de Valores**:
+  - Começar com valores pequenos (ex.: 0.001) e aumentar gradualmente (ex.: 0.003, 0.01, 0.03, 0.1).
+  - Para cada valor de $\alpha$, executar o gradiente descendente por algumas iterações e plotar o custo $J(w, b)$.
+  - Escolher o maior valor de $\alpha$ que ainda faz o custo diminuir de forma consistente.
+
+- **Estratégia de Multiplicação por 3**:
+  - Testar valores de $\alpha$ multiplicando por 3 (ex.: 0.001, 0.003, 0.01, 0.03, 0.1).
+  - Encontrar o valor ideal que equilibra velocidade de convergência e estabilidade.
 
