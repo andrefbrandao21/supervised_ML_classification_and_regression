@@ -131,15 +131,16 @@ Aqui, cada parâmetro **$w_j$** é atualizado individualmente, um por um, usando
 $$
 w_1 = w_1 - 0.1 \cdot d_1
 $$
+
 $$
 w_2 = w_2 - 0.1 \cdot d_2
 $$
+
 $$
 \vdots
 $$
-$$
-w_{16} = w_{16} - 0.1 \cdot d_{16}
-$$
+
+$$ w_{16} = w_{16} - 0.1 \cdot d_{16}$$
 
 **Implementação em Python**:
 ```python
