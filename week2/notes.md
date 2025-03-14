@@ -384,3 +384,72 @@ w = w - 0.1 * d
   - Testar valores de $\alpha$ multiplicando por 3 (ex.: 0.001, 0.003, 0.01, 0.03, 0.1).
   - Encontrar o valor ideal que equilibra velocidade de convergência e estabilidade.
 
+## Regressão Polinomial e Engenharia de Recursos
+
+### Importância da Escolha de Recursos
+- **Impacto no Desempenho**: A escolha ou criação de recursos adequados é crucial para o bom funcionamento do algoritmo de aprendizado.
+- **Engenharia de Recursos**: Processo de transformar ou combinar recursos originais para melhorar a capacidade preditiva do modelo.
+
+### Exemplo: Previsão do Preço de uma Casa
+- **Recursos Originais**:
+  - $x_1$: Largura do lote (fachada).
+  - $x_2$: Profundidade do lote.
+- **Modelo Inicial**:
+  $$ f(x) = w_1x_1 + w_2x_2 + b $$
+
+### Criação de um Novo Recurso
+- **Intuição**: A área do lote pode ser mais preditiva do preço do que a largura e a profundidade separadamente.
+- **Novo Recurso**:
+  $$ x_3 = x_1 \times x_2 $$
+  - $x_3$: Área do lote.
+
+### Modelo com Novo Recurso
+- **Modelo Atualizado**:
+  $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_3 + b $$
+- **Vantagem**: O modelo pode aprender a importância relativa de cada recurso (largura, profundidade e área) para prever o preço.
+
+### Engenharia de Recursos
+- **Definição**: Uso de conhecimento ou intuição sobre o problema para criar novos recursos, transformando ou combinando os recursos originais.
+- **Benefício**: Facilita a criação de modelos mais precisos e eficazes.
+
+
+
+### Introdução à Regressão Polinomial
+- **Objetivo**: Ajustar curvas (funções não lineares) aos dados, além de linhas retas.
+- **Exemplo**: Previsão do preço de casas com base no tamanho em pés quadrados ($x$).
+
+### Limitações da Regressão Linear Simples
+- **Ajuste Insuficiente**: Uma linha reta pode não se ajustar bem a dados que seguem padrões não lineares.
+- **Exemplo**: Dados de preços de casas que aumentam de forma não linear com o tamanho.
+
+### Regressão Polinomial
+- **Função Quadrática**:
+  - Inclui $x$ e $x^2$ (tamanho ao quadrado).
+  - Modelo: $$ f(x) = w_1x + w_2x^2 + b $$
+  - **Problema**: Uma função quadrática eventualmente diminui, o que não faz sentido para preços de casas.
+
+- **Função Cúbica**:
+  - Inclui $x$, $x^2$ e $x^3$ (tamanho ao cubo).
+  - Modelo: $$ f(x) = w_1x + w_2x^2 + w_3x^3 + b $$
+  - **Vantagem**: Ajusta melhor os dados, pois a curva pode continuar a subir.
+
+### Escalonamento de Recursos
+- **Importância**: Quando se elevam características a potências (ex.: $x^2$, $x^3$), as faixas de valores podem variar drasticamente.
+  - Exemplo: Se $x$ varia de 1 a 1.000, $x^2$ varia de 1 a 1.000.000 e $x^3$ de 1 a 1.000.000.000.
+- **Solução**: Aplicar escalonamento de recursos para garantir que todas as características estejam em faixas comparáveis.
+
+### Alternativas de Recursos
+- **Raiz Quadrada**:
+  - Modelo: $$ f(x) = w_1x + w_2\sqrt{x} + b $$
+  - **Vantagem**: A função nunca diminui, apenas se torna menos íngreme à medida que $x$ aumenta.
+
+### Escolha de Recursos e Modelos
+- **Decisão**: A escolha de recursos (ex.: $x$, $x^2$, $\sqrt{x}$) depende do problema e dos dados.
+- **Processo**: No segundo curso da especialização, você aprenderá a escolher e avaliar diferentes modelos e recursos.
+
+### Laboratórios Opcionais
+- **Regressão Polinomial**: Implementação de modelos com recursos como $x$, $x^2$ e $x^3$.
+- **Scikit-learn**: Uso de uma biblioteca popular de aprendizado de máquina para regressão linear.
+  - **Vantagem**: Facilita a implementação de modelos em poucas linhas de código.
+  - **Importância**: Entender a implementação manual é crucial, mas ferramentas como Scikit-learn são amplamente usadas na prática.
+
