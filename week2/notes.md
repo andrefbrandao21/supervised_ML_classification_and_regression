@@ -128,6 +128,7 @@ O código apresentado compara duas abordagens para atualizar os parâmetros **$w
 Aqui, cada parâmetro **$w_j$** é atualizado individualmente, um por um, usando um loop **for**. Isso significa que o computador executa cada operação de forma sequencial.
 
 **Matematicamente**:
+
 $$
 w_1 = w_1 - 0.1 \cdot d_1
 $$
